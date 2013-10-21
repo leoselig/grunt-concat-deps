@@ -108,7 +108,6 @@ module.exports = function(grunt) {
 		var options = this.options({
 			joinString: '\n'
 		});
-		grunt.config.requires(this.name + '.' + this.target + '.options.out');
 		this.files.forEach(function(f) {
 			grunt.log.writeln('Parsing modules');
 			var modules = [];
