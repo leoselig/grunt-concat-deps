@@ -17,6 +17,39 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-concat-deps');
 ```
 
+## Module definition
+
+The declarative module definition relies on the YuiDoc synax (http://yui.github.io/yuidoc/syntax/) that makes use of the annotations `@module` and `@requires`.
+It is possible to declare multiple modules in one file. Please note that in this case, dependencies inside of one single file are ignored.
+Find below an example of two files.
+#####Module_A.js
+```js
+/**
+ * @module A1
+ * @requires B
+ */
+var A1 = function() {
+
+}
+
+/**
+ * @module A2
+ * @requires A1
+ */
+var A2 = function() {
+
+}
+```
+#####Module_B.js
+```js
+/**
+ * @module B
+ */
+var B = function() {
+
+}
+```
+
 ## The "concat_deps" task
 
 ### Overview
@@ -35,50 +68,62 @@ grunt.initConfig({
 })
 ```
 
-### Options
+### Taget configuration
 
-#### options.separator
+#### [target].options.intro
 Type: `String`
-Default value: `',  '`
+Default value: `null`
 
-A string value that is used to do something with whatever.
+The file to be used as an intro (e.g. license information or beginning of self invoking function).
 
-#### options.punctuation
+#### [target].options.outro
 Type: `String`
-Default value: `'.'`
+Default value: `null`
 
-A string value that is used to do something else with whatever else.
+The file to be used as an outro (e.g. end of self invoking function).
+
+#### [target].options.out
+Type: `String`
+Default value: `null`
+
+The file into which the output should be written.
+
+#### [target].options.joinString
+Type: `String`
+Default value: `\n`
+
+The 'glue string' to be used when concatenating the files.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
 
 ```js
 grunt.initConfig({
-  concat_deps: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+  main: {
+	options: {
+		out:   'out/out.js'
+	},
+	files:   {
+		src:  'src/**/*.js'
+	}
 })
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
 ```js
 grunt.initConfig({
-  concat_deps: {
+  main: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+		intro: 'src/intro.js',
+		outro: 'src/outro.js',
+		out:   'out/out.js',
+        joinString: '\n'
+	},
+	files:   {
+		src:  'src/**/*.js'
+	}
 })
 ```
 
@@ -86,4 +131,4 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+```0.1.0``` Core functionality implemented
