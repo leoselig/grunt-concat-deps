@@ -1,12 +1,9 @@
 {
 	"name":             "grunt-concat-deps",
 	"description":      "Grunt plugin for concatenating files according to their declarative module definitions.",
-	"version":          "0.1.0",
+	"version":          "0.2.1",
 	"homepage":         "https://github.com/leoselig/grunt-concat-deps",
-	"author":           {
-		"name":  "Leo Selig",
-		"email": "selig.git@gmail.com"
-	},
+	"author":           "Leo Selig <selig.git@gmail.com>",
 	"repository":       {
 		"type": "git",
 		"url":  "https://github.com/leoselig/grunt-concat-deps.git"
@@ -40,5 +37,20 @@
 	},
 	"keywords":         [
 		"gruntplugin"
-	]
+	],
+	"readmeFilename":   "README.md",
+	"gitHead":          "cfd880fff3ef0448bb0e8b08fed1d4e16d377f93",
+	"directories":      {
+		"test": "test"
+	},
+	"dependencies":     {
+		"grunt-contrib-clean":    "~0.4.1",
+		"grunt":                  "~0.4.1",
+		"esprima":                "~1.0.4",
+		"yuidocjs":               "~0.3.45",
+		"underscore":             "~1.5.2",
+		"grunt-contrib-nodeunit": "~0.2.1",
+		"grunt-contrib-jshint":   "~0.6.4"
+	},
+	"license":          "MIT"
 }
