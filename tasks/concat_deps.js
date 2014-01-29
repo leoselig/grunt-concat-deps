@@ -20,14 +20,13 @@ module.exports = function(grunt) {
 	 * @returns {{modules: string[], requires: string[]}[]}
 	 * @private
 	 */
-	var parseModules = function(filename, code) {
+	var parseModules = function(filename, code, options) {
 		var parser = new (yuidoc.DocParser)({
 			syntaxtype: 'js'
 		});
 
-		var options = {};
-		options[filename] = code;
-		parser.parse(options);
+		yuidoc.config.debug = options.debug == undefined ? true : options.debug;
+		parser.parse({ filename: code });
 
 		var modules = [];
 		var requires = [];
@@ -126,7 +125,7 @@ module.exports = function(grunt) {
 					return;
 				}
 				grunt.verbose.writeln('Parsing ' + srcFile);
-				modules.push(parseModules(srcFile, grunt.file.read(srcFile)));
+				modules.push(parseModules(srcFile, grunt.file.read(srcFile), options));
 			});
 			grunt.verbose.writeln('Resolving dependencies for ' + modules.length +
 			                      ' files');
